@@ -90,14 +90,17 @@ public class HexagonGrid : MonoBehaviour {
     public Transform GetTransform() => _transform;
     public bool GetIsBuilded() => GridData.IsBuilded;
     private void SetIsUpgraded() => isUpgraded = false;
+
     private void MoveGridUnHover() {
         _transform.DOKill();
         _transform.DOMoveY(hoverEasePosition * GridData.BuildLevel - hoverEasePosition, hoverEaseTime);
     }
+
     private void MoveGridHover() {
         _transform.DOKill();
         _transform.DOMoveY(hoverEasePosition * GridData.BuildLevel, hoverEaseTime);
     }
+
     private void ResetData() {
         GridData.BuildLevel = 1;
         GridData.BuildId = 0;

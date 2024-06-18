@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeUIHandler : UIHandler {
+public class UpgradeUIHandler : InteractionUIHandler {
+    [Header("References")]
     [SerializeField] private Transform maxLevelPopUpTf;
     [SerializeField] private Image maxLevelPopUpImg;
+
     protected override void OnStart() {
         base.OnStart();
         uiManager.OnUpgradeOpen += OpenUI;
@@ -13,16 +15,10 @@ public class UpgradeUIHandler : UIHandler {
     public void UpgradeButtonOnClick() {
         soundManager.PlayButtonPositiveSound();
         if (gridManager.GetActiveHexagonGrid().GridData.BuildLevel == 4) {
-            PopUp(maxLevelPopUpTf);
-            if (activeNumerator != null) StopCoroutine(activeNumerator);
-            activeNumerator = PopUpColor(maxLevelPopUpImg);
-            StartCoroutine(activeNumerator);
+            OnMaxLevel();
             return;
         } else if (!resourceManager.IsEnoughResource()) {
-            PopUp(resourcePopUpTf);
-            if (activeNumerator != null) StopCoroutine(activeNumerator);
-            activeNumerator = PopUpColor(resourcePopUpImg);
-            StartCoroutine(activeNumerator);
+            NotEnoughResource();
             return;
         }
         gridManager.GetActiveHexagonGrid().Upgrade();
@@ -33,6 +29,13 @@ public class UpgradeUIHandler : UIHandler {
         soundManager.PlayDestructionSound();
         gridManager.GetActiveHexagonGrid().DestroyBuilding();
         CloseUI();
+    }
+
+    private void OnMaxLevel() {
+        PopUp(maxLevelPopUpTf);
+        if (activeNumerator != null) StopCoroutine(activeNumerator);
+        activeNumerator = PopUpColor(maxLevelPopUpImg);
+        StartCoroutine(activeNumerator);
     }
 
     protected override void CloseEvent() {

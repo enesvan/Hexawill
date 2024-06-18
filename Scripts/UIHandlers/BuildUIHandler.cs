@@ -1,4 +1,4 @@
-public class BuildUIHandler : UIHandler {
+public class BuildUIHandler : InteractionUIHandler {
     protected override void OnStart() {
         base.OnStart();
         uiManager.OnBuildOpen += OpenUI;
@@ -7,10 +7,7 @@ public class BuildUIHandler : UIHandler {
     public void BuildButtonOnClick(int id) {
         soundManager.PlayButtonPositiveSound();
         if (!resourceManager.IsEnoughResource()) {
-            PopUp(resourcePopUpTf);
-            if (activeNumerator != null) StopCoroutine(activeNumerator);
-            activeNumerator = PopUpColor(resourcePopUpImg);
-            StartCoroutine(activeNumerator);
+            NotEnoughResource();
             return;
         }
         gridManager.GetActiveHexagonGrid().Build(id);

@@ -14,6 +14,7 @@ public class PlayerManager : Manager {
         base.AwakeManager();
         var service = ServiceManager.Instance;
         service.RegisterManager<PlayerManager>(this);
+
         mainCamera = Camera.main;
         isActive = false;
     }
@@ -70,10 +71,7 @@ public class PlayerManager : Manager {
         }
     }
 
-    private void Hover() {
-        gridManager.GetHexagonGrid(selectedTile).Hover();
-    }
-
+    private void Hover() => gridManager.GetHexagonGrid(selectedTile).Hover();
     private void UnHover() {
         gridManager.GetHexagonGrid(selectedTile).UnHover();
         selectedTile = null;
@@ -86,9 +84,7 @@ public class PlayerManager : Manager {
         }
         isActive = true;
     }
-    public void SetPlayerDeActive() {
-        isActive = false;
-    }
 
+    public void SetPlayerDeActive() => isActive = false;
     public HexagonGrid GetSelectedHexagon() => gridManager.GetHexagonGrid(selectedTile);
 }

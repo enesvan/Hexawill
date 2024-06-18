@@ -5,6 +5,7 @@ using UnityEngine;
 public class ResourceManager : Manager {
     public ResourceData ResourceData;
 
+    [Header("Values")]
     [SerializeField] private float resourceSequenceTime = 5f;
     [SerializeField] private float resourceMultiplier;
     [SerializeField] private float resourceUsageAmount = 100f;

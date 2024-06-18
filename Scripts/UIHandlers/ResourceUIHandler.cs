@@ -1,7 +1,8 @@
 using TMPro;
 using UnityEngine;
 
-public class ResourceUIHandler : MonoBehaviour {
+public class ResourceUIHandler : InGameUIHandler {
+    [Header("References")]
     [SerializeField] private TextMeshProUGUI humanResourceText;
     [SerializeField] private TextMeshProUGUI funResourceText;
     [SerializeField] private TextMeshProUGUI warResourceText;
@@ -11,7 +12,8 @@ public class ResourceUIHandler : MonoBehaviour {
 
     private ResourceManager resourceManager;
 
-    private void Start() {
+    protected override void OnStart() {
+        base.OnStart();
         var service = ServiceManager.Instance;
         resourceManager = service.GetManager<ResourceManager>();
         UpdateTexts();
@@ -24,10 +26,5 @@ public class ResourceUIHandler : MonoBehaviour {
         farmResourceText.text = GetFormattedText((int)resourceManager.ResourceData.Resources[3]);
         mineResourceText.text = GetFormattedText((int)resourceManager.ResourceData.Resources[4]);
         coinResourceText.text = GetFormattedText((int)resourceManager.ResourceData.Resources[5]);
-    }
-
-    private string GetFormattedText(int amount) {
-        if (amount < 1000) return $"{amount}";
-        else return $"{amount / 1000}.{(amount % 1000) / 100}k";
     }
 }

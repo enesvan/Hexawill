@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class BuildButton : MonoBehaviour {
+    [Header("References")]
     [SerializeField] private Button button;
     [SerializeField] private Image image;
     [SerializeField] private Sprite baseSprite;

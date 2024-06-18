@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIHandler : MonoBehaviour {
+public class InteractionUIHandler : MonoBehaviour {
+    [Header("Interaction UI Handler")]
     [SerializeField] protected List<BuildButton> buttons;
     [SerializeField] protected GameObject buttonsObj;
     [SerializeField] protected Transform resourcePopUpTf;
@@ -75,6 +76,13 @@ public class UIHandler : MonoBehaviour {
     }
 
     protected virtual void CloseEvent() { }
+
+    protected void NotEnoughResource() {
+        PopUp(resourcePopUpTf);
+        if (activeNumerator != null) StopCoroutine(activeNumerator);
+        activeNumerator = PopUpColor(resourcePopUpImg);
+        StartCoroutine(activeNumerator);
+    }
 
     protected void PopUp(Transform tf) {
         var position = mainCamera.WorldToScreenPoint(gridManager.GetActiveHexagonGrid().GetTransform().position);

@@ -13,17 +13,18 @@ public class UIManager : Manager {
     public Action OnSettingsClose;
     public Action OnLoseOpen;
 
-    public override void AwakeManager() {
-        base.AwakeManager();
-        var service = ServiceManager.Instance;
-        service.RegisterManager<UIManager>(this);
-    }
-
+    [Header("References")]
     [SerializeField] private BuildUIHandler buildUIHandler;
     [SerializeField] private UpgradeUIHandler upgradeUIHandler;
     [SerializeField] private ResourceUIHandler resourceUIHandler;
     [SerializeField] private EventUIHandler eventUIHandler;
     [SerializeField] private LoseUIHandler loseUIHandler;
+
+    public override void AwakeManager() {
+        base.AwakeManager();
+        var service = ServiceManager.Instance;
+        service.RegisterManager<UIManager>(this);
+    }
 
     public BuildUIHandler GetBuildUIHandler() => buildUIHandler;
     public UpgradeUIHandler GetUpgradeUIHandler() => upgradeUIHandler;

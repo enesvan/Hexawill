@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class SoundManager : Manager {
+    [Header("References")]
     [SerializeField] private AudioSource backgroundSoundSource;
     [SerializeField] private AudioSource buttonPositiveSoundSource;
     [SerializeField] private AudioSource buttonNegativeSoundSource;

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EventUIHandler : MonoBehaviour {
+public class EventUIHandler : InGameUIHandler {
     [Header("References")]
     [SerializeField] private Slider slider;
     [SerializeField] private TextMeshProUGUI eventText;
@@ -12,15 +12,13 @@ public class EventUIHandler : MonoBehaviour {
     [SerializeField] private List<Sprite> resourceSprites;
 
     private EventManager eventManager;
-    private SoundManager soundManager;
     private bool isActive = false;
     private float aimedSliderValue;
 
-    private void Start() {
+    protected override void OnStart() {
+        base.OnStart();
         var service = ServiceManager.Instance;
-        var uiManager = service.GetManager<UIManager>();
         eventManager = service.GetManager<EventManager>();
-        soundManager = service.GetManager<SoundManager>();
 
         uiManager.OnPlay += () => {
             slider.minValue = 0;
@@ -50,10 +48,5 @@ public class EventUIHandler : MonoBehaviour {
             isActive = true;
             soundManager.PlayEventSound();
         });
-    }
-
-    private string GetFormattedText(int amount) {
-        if (amount < 1000) return $"{amount}";
-        else return $"{amount / 1000}.{(amount % 1000) / 100}k";
     }
 }

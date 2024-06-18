@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class CameraInputHandler : MonoBehaviour {
+    [Header("Values")]
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float rotationEaseMultiplier = 80f;
 
